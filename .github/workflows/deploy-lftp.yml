@@ -1,0 +1,78 @@
+name: Deploy with lftp (Hostinger)
+
+on:
+  push:
+    branches: [ "main" ]   # mude se usar outra branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Add .htaccess (SPA)
+        run: |
+          cat > dist/.htaccess << 'EOF'
+          RewriteEngine On
+          RewriteBase /
+          RewriteRule ^index\.html$ - [L]
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule . /index.html [L]
+          EOF
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy via FTPS (preferido)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}       # 147.93.14.207
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}   # u234345696.copypriceprofx.site
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}   # sua senha
+          FTP_FOLDER: ${{ secrets.FTP_FOLDER }}       # /public_html/
+        run: |
+          lftp -e "
+            set ssl:verify-certificate no;
+            set ftp:passive-mode on;
+            open -u $FTP_USERNAME,$FTP_PASSWORD ftps://$FTP_SERVER:21;
+            mirror -R --only-newer --parallel=4 \
+              --exclude-glob .git* \
+              --exclude-glob .github/** \
+              --exclude-glob node_modules/** \
+              --exclude-glob .well-known/** \
+              dist $FTP_FOLDER;
+            bye
+          "
+
+      - name: (Fallback) Deploy via FTP puro se FTPS falhar
+        if: failure()
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_FOLDER: ${{ secrets.FTP_FOLDER }}
+        run: |
+          lftp -e "
+            set ftp:ssl-allow no;
+            set ftp:passive-mode on;
+            open -u $FTP_USERNAME,$FTP_PASSWORD ftp://$FTP_SERVER:21;
+            mirror -R --only-newer --parallel=4 \
+              --exclude-glob .git* \
+              --exclude-glob .github/** \
+              --exclude-glob node_modules/** \
+              --exclude-glob .well-known/** \
+              dist $FTP_FOLDER;
+            bye
+          "
