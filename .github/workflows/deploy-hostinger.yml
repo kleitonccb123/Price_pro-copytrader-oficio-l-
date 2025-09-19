@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # (Vite 5 pede Node >=18; 20 é estável)
+          node-version: "20"
 
       - name: Install deps
         run: npm ci
@@ -25,6 +25,7 @@ jobs:
 
       - name: Add .htaccess for SPA
         run: |
+          mkdir -p dist
           cat > dist/.htaccess << 'EOF'
           RewriteEngine On
           RewriteBase /
@@ -34,12 +35,21 @@ jobs:
           RewriteRule . /index.html [L]
           EOF
 
+      # ✅ Nome/case correto do action e versão "pinada"
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_FOLDER }}
           local-dir: dist
+          protocol: ftps
+          port: 21
+          # Opcional: evitar subir lixo
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/*.map
           dangerous-clean-slate: true
