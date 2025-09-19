@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* PricePro Official Brand Palette - Blue Theme */
+    --background: 226 89% 18%;        /* #051D57 - Navy (sombra do fundo) */
+    --foreground: 210 33% 98%;        /* #F7F9FA - Branco gelo (texto) */
+
+    --card: 228 72% 35%;              /* #18419C - Índigo */
+    --card-foreground: 210 33% 98%;   /* #F7F9FA - Branco gelo */
+
+    --popover: 228 72% 35%;           /* #18419C - Índigo */
+    --popover-foreground: 210 33% 98%; /* #F7F9FA - Branco gelo */
+
+    --primary: 218 90% 44%;           /* #0A50D3 - Azul profundo (primário) */
+    --primary-foreground: 210 33% 98%; /* #F7F9FA - Branco gelo */
+
+    --secondary: 220 90% 40%;         /* #0753C4 - Azul royal */
+    --secondary-foreground: 210 33% 98%; /* #F7F9FA - Branco gelo */
+
+    --muted: 228 72% 35%;             /* #18419C - Índigo */
+    --muted-foreground: 210 33% 98%;  /* #F7F9FA - Branco gelo */
+
+    --accent: 218 90% 44%;            /* #0A50D3 - Azul profundo (CTA/Emphasis) */
+    --accent-foreground: 210 33% 98%; /* #F7F9FA - Branco gelo */
+
+    --destructive: 0 84% 60%;         /* #EF4444 - Error state */
+    --destructive-foreground: 210 33% 98%; /* #F7F9FA - Branco gelo */
+
+    --warning: 38 92% 50%;            /* #F59E0B - Warning state */
+    --warning-foreground: 252 26% 8%; /* #13101A - Carvão */
+
+    --success: 218 90% 44%;           /* #0A50D3 - Azul profundo (Success state) */
+    --success-foreground: 210 33% 98%; /* #F7F9FA - Branco gelo */
+
+    --border: 220 90% 40%;            /* #0753C4 - Azul royal (Borders/Dividers) */
+    --input: 228 72% 35%;             /* #18419C - Índigo */
+    --ring: 218 90% 44%;              /* #0A50D3 - Azul profundo */
+
+    --radius: 0.5rem;
+
+    /* PricePro Extended Palette - Blue Theme */
+    --slate-50: 210 33% 98%;          /* #F7F9FA - Branco gelo */
+    --slate-100: 210 33% 96%;
+    --slate-200: 210 33% 94%;
+    --slate-300: 220 90% 40%;         /* #0753C4 - Azul royal */
+    --slate-400: 218 90% 44%;         /* #0A50D3 - Azul profundo */
+    --slate-500: 228 72% 35%;         /* #18419C - Índigo */
+    --slate-600: 226 89% 18%;         /* #051D57 - Navy */
+    --slate-700: 252 26% 8%;          /* #13101A - Carvão */
+    --slate-800: 228 72% 35%;         /* #18419C - Índigo */
+    --slate-900: 226 89% 18%;         /* #051D57 - Navy */
+    --slate-950: 252 26% 8%;          /* #13101A - Carvão */
+
+    /* Blue Accent Variations */
+    --emerald-400: 220 90% 40%;       /* #0753C4 - Azul royal */
+    --emerald-500: 218 90% 44%;       /* #0A50D3 - Azul profundo */
+    --emerald-600: 228 72% 35%;       /* #18419C - Índigo */
+    --emerald-700: 226 89% 18%;       /* #051D57 - Navy */
+
+    /* Blue Accent Variations */
+    --sky-400: 218 90% 44%;           /* #0A50D3 - Azul profundo */
+    --sky-500: 220 90% 40%;           /* #0753C4 - Azul royal */
+
+    /* PricePro Official Gradients - Blue Theme */
+    --gradient-hero: linear-gradient(180deg, #051D57 0%, #18419C 100%);
+    --gradient-headline: linear-gradient(90deg, #0A50D3 0%, #0753C4 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--secondary)));
+    --gradient-dark: linear-gradient(135deg, hsl(var(--slate-950)), hsl(var(--slate-900)));
+
+    /* Menu Gradients (Floating buttons) - Blue Theme */
+    --gradient-menu-1: linear-gradient(135deg, #0A50D3, #0753C4);
+    --gradient-menu-2: linear-gradient(135deg, #0753C4, #0A50D3);
+    --gradient-menu-3: linear-gradient(135deg, #0A50D3, #18419C);
+    --gradient-menu-4: linear-gradient(135deg, #18419C, #0753C4);
+    --gradient-menu-5: linear-gradient(135deg, #0753C4, #0A50D3);
+
+    /* PricePro Shadows - Blue Theme */
+    --shadow-emerald: 0 10px 30px -10px hsl(var(--accent) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--accent) / 0.2);
+    --shadow-blue: 0 10px 30px -10px hsl(var(--secondary) / 0.2);
+    --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    /* Glass Effects */
+    --glass-bg: rgba(255, 255, 255, 0.05);        /* #FFFFFF14 equivalent */
+    --glass-border: rgba(255, 255, 255, 0.08);    /* #FFFFFF14 equivalent */
+
+    /* Component Patterns - Blue Theme */
+    --btn-primary-bg: 218 90% 44%;      /* #0A50D3 - Azul profundo */
+    --btn-primary-hover: 220 90% 40%;   /* #0753C4 - Azul royal */
+    --btn-primary-text: 210 33% 98%;    /* #F7F9FA - Branco gelo */
+    --btn-primary-ring: 218 90% 44%;    /* #0A50D3 */
+
+    --btn-secondary-bg: 228 72% 35%;    /* #18419C - Índigo */
+    --btn-secondary-hover: 226 89% 18%; /* #051D57 - Navy */
+    --btn-secondary-text: 210 33% 98%;  /* #F7F9FA - Branco gelo */
+    --btn-secondary-border: rgba(255, 255, 255, 0.08); /* #FFFFFF14 */
+
+    /* Trading Chart Colors - Blue Theme */
+    --chart-bull: 218 90% 44%;          /* #0A50D3 - Azul profundo (Alta) */
+    --chart-bear: 0 84% 60%;            /* #EF4444 - Baixa */
+    --chart-vwap: 220 90% 40%;          /* #0753C4 - Azul royal (VWAP/MA) */
+    --chart-grid: rgba(255, 255, 255, 0.06); /* #FFFFFF0F */
+    --chart-labels: 210 33% 98%;        /* #F7F9FA - Branco gelo */
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
